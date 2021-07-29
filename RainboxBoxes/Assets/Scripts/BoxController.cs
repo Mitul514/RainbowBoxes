@@ -5,17 +5,18 @@ using UnityEngine;
 
 public class BoxController : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro m_NumText;
-    public int CurrVal;
+  [SerializeField] private TextMeshPro m_NumText;
 
-    public void SetData(int val)
-    {
-        m_NumText.text = val.ToString();
-        CurrVal = val;
-    }
+  public int CurrVal;
 
-    private void OnMouseDown()
-    {
-        BoxManager.BMinstance.GetClickedObjects(this.gameObject);
-    }
+  public void SetData(int val)
+  {
+    m_NumText.text = val.ToString();
+    CurrVal = val;
+  }
+
+  private void OnMouseDown()
+  {
+    BoxManager.BMinstance.GetClickedObjects(this.gameObject);
+  }
 }
