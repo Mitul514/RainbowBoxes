@@ -13,4 +13,7 @@ public class WeaponData : ScriptableObject
     public int TotalWeaponAmmo;
     public int AmmoLeft;
     public float ReloadTime;
+    [Tooltip("RPM(Rounds/Min)")]
+    public int FireRate;
+    public int BaseDamage;
 }

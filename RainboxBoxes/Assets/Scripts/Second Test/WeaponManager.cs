@@ -2,35 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class WeaponManager : MonoBehaviour
+public class WeaponManager : MonoBehaviour
 {
     [SerializeField] protected WeaponData weaponData;
     [SerializeField] protected PlayerManager playerManager;
-   
-    protected int TotalAmmo { get => weaponData.TotalWeaponAmmo; }
+    [SerializeField] protected UiManager uiManager;
 
-    private void OnEnable()
+    protected int TotalAmmo { get => weaponData.TotalWeaponAmmo; }
+   
+    private void Start()
+    {
+        weaponData.AmmoLeft = TotalAmmo;        
+    }
+
+    protected virtual void OnEnable()
     {
         playerManager.OnShootSignal += OnShootClicked;
         playerManager.OnWeapoReload += ReloadWeapon;
+        uiManager.PrintWeaponData(weaponData);
+        uiManager.PrintWeaponAmmo(weaponData);
+
     }
 
-    private void OnDisable()
+    protected void OnDisable()
     {
         playerManager.OnShootSignal -= OnShootClicked;
         playerManager.OnWeapoReload -= ReloadWeapon;
     }
 
-    protected abstract void OnShootClicked();
-   
+    protected virtual void OnShootClicked()
+    {
+        weaponData.AmmoLeft -= 1;
+    }
+
     protected void ReloadWeapon()
     {
         StartCoroutine(ReloadAfterDelay(weaponData.ReloadTime));
+        uiManager.PrintWeaponAmmo(weaponData);
     }
 
     private IEnumerator ReloadAfterDelay(float delay)
     { 
         yield return new WaitForSeconds(delay);
-        weaponData.TotalWeaponAmmo = TotalAmmo;
+        weaponData.AmmoLeft = TotalAmmo;
+        uiManager.PrintWeaponAmmo(weaponData);
     }
 }

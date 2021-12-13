@@ -10,9 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e58ae17529369499aadfb085d9ccc959, type: 3}
-  m_Name: PrimaryWeapon
+  m_Name: SecondaryWeapon
   m_EditorClassIdentifier: 
-  Type: 0
-  TotalWeaponAmmo: 30
+  Type: 1
+  TotalWeaponAmmo: 60
   AmmoLeft: 0
-  ReloadTime: 2
+  ReloadTime: 3
+  FireRate: 60
+  BaseDamage: 30
